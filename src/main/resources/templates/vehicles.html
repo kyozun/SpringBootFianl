@@ -1,0 +1,88 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Employee Management System</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <nav class="bg-blue-800 text-white py-4 text">
+      <div
+        class="container mx-auto flex flex-row items-center justify-between font-medium"
+      >
+        <div class="flex flex-row space-x-4 cursor-pointer">
+          <div>ApFast</div>
+          <div>Monitor</div>
+          <div>Catalogues</div>
+        </div>
+
+        <div class="flex flex-row items-center space-x-4">
+          <div>Login</div>
+          <div>Logout</div>
+          <img
+            src="https://i.pravatar.cc/300"
+            alt=""
+            class="inline-block h-10 w-10 rounded-full cursor-pointer hover:scale-110 transition duration-150"
+          />
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto">
+      <div class="flex items-center justify-center">
+        <a
+          class="bg-rose-500 px-4 py-2 my-4 text-white rounded-md w-44 text-center font-medium cursor-pointer hover:bg-rose-600 hover:scale-105 hover:shadow-blue-600 transition duration-150"
+          th:href="@{/vehicles/new}"
+        >
+          + Add Vehicle
+        </a>
+      </div>
+
+      <div class="overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500">
+          <thead class="text-xs bg-blue-950 text-white">
+            <tr class="font-bold text-xl">
+              <th class="px-6 py-4">No</th>
+              <th class="px-6 py-4">Vehicle Id</th>
+              <th class="px-6 py-4">Vehicle Name</th>
+              <th class="px-6 py-4">Vehicle Model</th>
+              <th class="px-6 py-4">Year of Manufacture</th>
+              <th class="px-6 py-4">Vehicle Color</th>
+              <th class="px-6 py-4">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="vehicle: ${vehicles}">
+              <td class="px-6 py-4" th:text="${vehicle.id}"></td>
+              <td class="px-6 py-4" th:text="${vehicle.vehicle_id}"></td>
+              <td class="px-6 py-4" th:text="${vehicle.vehicle_name}"></td>
+              <td class="px-6 py-4" th:text="${vehicle.vehicle_model}"></td>
+              <td
+                class="px-6 py-4"
+                th:text="${vehicle.year_of_manufacture}"
+              ></td>
+              <td class="px-6 py-4" th:text="${vehicle.vehicle_color}"></td>
+              <td class="px-6 py-4">
+                <a
+                  class="bg-emerald-800 px-4 py-2 text-white font-medium rounded-md mr-2"
+                  th:href="@{/vehicles/edit/{id}(id=${vehicle.id})}"
+                >
+                  Update
+                </a>
+
+                <a
+                  th:href="@{/vehicles/{id}(id=${vehicle.id})}"
+                  class="bg-rose-500 px-4 py-2 text-white font-medium rounded-md focus:outline-none focus:ring-4 focus:ring-rose-200 hover:ring-4 transition ease-in-out hover:bg-rose-600 duration-200"
+                >
+                  Delete
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
